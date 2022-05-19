@@ -1,4 +1,5 @@
 ;***********************************************
+;Alessandra Andrade Ac
 ;Configuro Puerto N pin 0 como salida
 ;***********************************************
 GPION EQU 0x40064000		;puerto N dir base
@@ -29,10 +30,10 @@ ConfN
 	;Espero hasta que el puerto se estabilice
     
     LDR R1, =SYSCTL_PRGPIO       	; R1 = SYSCTL_PRGPIO (puntero)
-GPIOCinitloop
-    LDR R0, [R1]                    ; R0 = [R1] (lee valor)
+GPIONinitloop
+    LDR R0, [R1]                    ;R0 = [R1] (lee valor)
     ANDS R0, R0, #SYSCTL_PRGPIO_R12  ; R0 = R0&SYSCTL_PRGPIO_R%
-    ;BEQ GPIOCinitloop 
+    BEQ GPIONinitloop 
 	
 ;-----------------------------------------------------------------------------	
     ; Coloca pin N0 como salida
@@ -46,17 +47,17 @@ GPIOCinitloop
 	
     LDR R1, =GPIO_PORTN_AFSEL       ; R1 = GPIO_PORTN_AFSEL (puntero)
     LDR R0, [R1]                    ; R0 = [R1] (lee valor)
-    BIC R0, R0, #0x00               ; R0 = R0&~0x01 (dehabilitafunción alternativa de PF0)
+    BIC R0, R0, #0x00               ; R0 = R0&~0x00 (dehabilitafunción alternativa de PN0)
     STR R0, [R1] 	
 ;-------------------------------------------------------------------------------	
     ; set digital enable register
-    LDR R1, =GPIO_PORTN_DEN       ; R1 = GPIO_PORTN_DEN_R (pointer)
+    LDR R1, =GPIO_PORTN_DEN       	; R1 = GPIO_PORTN_DEN_R (pointer)
     LDR R0, [R1]                    ; R0 = [R1] (value)
-    ORR R0, R0, #0x01               ; R0 = R0|0x01 (enable digital I/O on PF0)
+    ORR R0, R0, #0x01               ; R0 = R0|0x01 (enable digital I/O on PN0)
     STR R0, [R1]    				; [R1] = R0
 	BX LR
 ;*****************************************************************************************
 					
 	
-	ALIGN                           ; make sure the end of this section is aligned
-	END                             ; end of file
+			ALIGN                           ; make sure the end of this section is aligned
+			END                             ; end of file
