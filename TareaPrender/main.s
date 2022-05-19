@@ -1,6 +1,6 @@
 SYSTICK				EQU 0XE000E000	
 SYSTICK_CTRL		EQU 0xE000E010	;direccion del registro CTRL de systick
-GPIO_PORTN_DATO  	EQU 0x40064001	;mascara del puerto c
+GPIO_PORTN_DATO  	EQU 0x40064004	;mascara del puerto c
 
 		
 

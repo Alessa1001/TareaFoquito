@@ -46,7 +46,7 @@ GPIOCinitloop
 	
     LDR R1, =GPIO_PORTN_AFSEL       ; R1 = GPIO_PORTN_AFSEL (puntero)
     LDR R0, [R1]                    ; R0 = [R1] (lee valor)
-    BIC R0, R0, #0x01               ; R0 = R0&~0x01 (dehabilitafunción alternativa de PF0)
+    BIC R0, R0, #0x00               ; R0 = R0&~0x01 (dehabilitafunción alternativa de PF0)
     STR R0, [R1] 	
 ;-------------------------------------------------------------------------------	
     ; set digital enable register
@@ -58,5 +58,5 @@ GPIOCinitloop
 ;*****************************************************************************************
 					
 	
-			ALIGN                           ; make sure the end of this section is aligned
-			END                             ; end of file
+	ALIGN                           ; make sure the end of this section is aligned
+	END                             ; end of file

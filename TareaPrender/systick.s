@@ -36,7 +36,9 @@ prender
 		LDR R0, [R1]									;le el registro SYSTICKCTRL
 		ORR R0, R0, #0X01								;activa systick ENABLE=1
 		STR R0, [R1]									;se almacena ese valor en SYSTICKCTRL
-		LDR R1, =SYSTICK_CTRL							;carga la direrción de SYSTICKCTRL en R1
+		LDR R1, =SYSTICK_CTRL	;carga la direrción de SYSTICKCTRL en R1
+		
+		
 loop
 		LDR R0, [R1]									;se lee el registro SYSTICKCTRL 
 		ANDS R0, #0X010000								;convierte valor en cero o uno dependiendo de CLK_SRC
